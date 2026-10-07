@@ -47,17 +47,18 @@
         <span>🎁 Click Here Surprise!</span>
       </button>
       <button id="btn-pocket" class="cute-btn btn-gadget" onclick="pullGadgetFromPocket()">
-        <span>🎒 4D Pocket Gadget</span>
+        <span>🎁 Open 4D Pocket Gift</span>
       </button>
     </div>
 
     <!-- 4D Pocket Gadget Box -->
-    <section class="gadget-box" aria-label="Doraemon 4D Pocket Gadget Box">
+    <section class="gadget-box" id="gadget-box" onclick="pullGadgetFromPocket()" aria-label="Doraemon 4D Pocket Gadget Box" title="Click to pull a surprise gift!">
       <div class="pocket-header">
         <span class="pocket-bell">🔔</span>
         <span>Doraemon's 4D Pocket!</span>
         <span class="pocket-bell">🔔</span>
       </div>
+      <div class="pocket-hint">✨ Tap anywhere on this pocket to pull a surprise gift! 🎁</div>
       <div class="gadget-display" id="gadget-display">
         <div class="gadget-name" id="gadget-name">🚁 Bamboo Copter (Take-Copter)</div>
         <div class="gadget-desc" id="gadget-desc">"Attach it to your head and fly freely anywhere in the sky!"</div>

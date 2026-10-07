@@ -222,17 +222,30 @@ function pullGadgetFromPocket() {
   const gadget = gadgets[newIndex];
   const nameEl = document.getElementById('gadget-name');
   const descEl = document.getElementById('gadget-desc');
+  const boxEl = document.getElementById('gadget-box');
 
-  if (nameEl && descEl) {
-    nameEl.style.transform = "scale(0.8)";
-    setTimeout(() => {
-      nameEl.innerHTML = `${gadget.emoji} ${gadget.name}`;
-      descEl.textContent = `"${gadget.desc}"`;
-      nameEl.style.transform = "scale(1)";
-    }, 150);
+  // Trigger pocket shake animation
+  if (boxEl) {
+    boxEl.classList.remove('shake');
+    void boxEl.offsetWidth; // trigger reflow
+    boxEl.classList.add('shake');
   }
 
-  launchConfetti(false);
+  // Update gadget card
+  if (nameEl && descEl) {
+    nameEl.innerHTML = `${gadget.emoji} ${gadget.name}`;
+    descEl.textContent = `"${gadget.desc}"`;
+  }
+
+  // Launch celebratory confetti with emojis
+  launchConfetti(true);
+
+  // Present the Gift in the Cute Modal Popup!
+  showCuteModal(
+    "🎁 4D Pocket Gift Unlocked!",
+    `Doraemon reached into his pocket and gifted you:\n\n✨ ${gadget.name} ✨\n\n${gadget.desc}`,
+    gadget.emoji
+  );
 }
 
 // 🔊 Sound Toggle Handler

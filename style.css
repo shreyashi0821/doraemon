@@ -468,18 +468,38 @@ h1.main-title:hover {
 .gadget-box {
   width: 100%;
   max-width: 650px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   border-radius: 28px;
-  padding: 26px 30px;
+  padding: 24px 28px;
   box-shadow: var(--shadow-kawaii);
   border: 3px dashed #3ea7e0;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.gadget-box:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: #ff7597;
+  box-shadow: 0 16px 32px rgba(62, 167, 224, 0.25);
+}
+
+.gadget-box.shake {
+  animation: pocketShake 0.5s ease;
+}
+
+@keyframes pocketShake {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.04) rotate(-2deg); }
+  50% { transform: scale(1.04) rotate(2deg); }
+  75% { transform: scale(1.02) rotate(-1deg); }
 }
 
 .pocket-header {
@@ -489,6 +509,25 @@ h1.main-title:hover {
   font-size: 1.4rem;
   font-weight: 700;
   color: #0277bd;
+}
+
+.pocket-hint {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #d81b60;
+  background: #ffe4ec;
+  padding: 5px 14px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px dashed #ff7597;
+  animation: pulseHint 2s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .pocket-bell {
