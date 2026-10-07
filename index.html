@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mai hu ek udta robot Doraemon! Shreya's super cute and creative website with bamboo copter, magical gadgets, and sweet surprises.">
+  <title>✨ Yaaa Helicopter | Doraemon & Shreya's World 🚁</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- Floating animated background clouds -->
+  <div class="background-decorations" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <!-- Sound Toggle -->
+  <button id="sound-toggle-btn" class="sound-toggle-btn" onclick="toggleSound()" aria-label="Toggle cute sounds">
+    🔔 Sound: ON
+  </button>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Main Content Wrapper -->
+  <main class="page-container">
+
+    <!-- Header Section -->
+    <header class="hero-header">
+      <div class="helicopter-badge">
+        <span class="propeller" aria-hidden="true">🚁</span>
+        <span class="badge-text">Take-Copter Flying Club</span>
+      </div>
+      <h1 class="main-title">Mai Hu Ek Udta Robot Doraemon 🚁💙</h1>
+      <p class="sub-tagline">✨ Welcome to Shreya's magical & cute corner of happiness! 🌸</p>
+    </header>
+
+    <!-- Action Buttons -->
+    <div class="button-row">
+      <button id="btn-click-me" class="cute-btn btn-primary" onclick="testfn()">
+        <span>👋 Click Me</span>
+      </button>
+      <button id="btn-surprise" class="cute-btn btn-surprise" onclick="yourfn()">
+        <span>🎁 Click Here Surprise!</span>
+      </button>
+      <button id="btn-pocket" class="cute-btn btn-gadget" onclick="pullGadgetFromPocket()">
+        <span>🎒 4D Pocket Gadget</span>
+      </button>
+    </div>
+
+    <!-- 4D Pocket Gadget Box -->
+    <section class="gadget-box" aria-label="Doraemon 4D Pocket Gadget Box">
+      <div class="pocket-header">
+        <span class="pocket-bell">🔔</span>
+        <span>Doraemon's 4D Pocket!</span>
+        <span class="pocket-bell">🔔</span>
+      </div>
+      <div class="gadget-display" id="gadget-display">
+        <div class="gadget-name" id="gadget-name">🚁 Bamboo Copter (Take-Copter)</div>
+        <div class="gadget-desc" id="gadget-desc">"Attach it to your head and fly freely anywhere in the sky!"</div>
+      </div>
+    </section>
+
+    <!-- Cute Photo Gallery Section -->
+    <section class="gallery-section" aria-label="Photo Gallery">
+      <div class="section-title-wrap">
+        <span class="section-pill">📸 Memories & Sweet Bites</span>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Card 1: abc.jpg -->
+        <article class="photo-card card-1" onclick="playCuteChime('pop')">
+          <div class="image-frame">
+            <img src="abc.jpg" alt="Doraemon buddy illustration" loading="lazy">
+          </div>
+          <div class="card-info">
+            <span class="sticker-tag">💙 Anime Buddy</span>
+            <h2 class="photo-caption">Doraemon Vibe</h2>
+            <p class="photo-sub">Always ready for adventures</p>
+          </div>
+        </article>
+
+        <!-- Card 2: shreya.jpg -->
+        <article class="photo-card card-2" onclick="playCuteChime('pop')">
+          <div class="image-frame">
+            <img src="shreya.jpg" alt="Shreya's sweet photo" loading="lazy">
+          </div>
+          <div class="card-info">
+            <span class="sticker-tag">✨ Superstar</span>
+            <h2 class="photo-caption">Shreya</h2>
+            <p class="photo-sub">Smiling & having the best time!</p>
+          </div>
+        </article>
+
+        <!-- Card 3: cake.jpg -->
+        <article class="photo-card card-3" onclick="playCuteChime('pop')">
+          <div class="image-frame">
+            <img src="cake.jpg" alt="Delicious celebration cake" loading="lazy">
+          </div>
+          <div class="card-info">
+            <span class="sticker-tag">🎂 Sweet Tooth</span>
+            <h2 class="photo-caption">Yummy Cake</h2>
+            <p class="photo-sub">Better than 100 dorayakis!</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cute Footer -->
+    <footer class="cute-footer">
+      <span>Made with lots of 💖, sparkles & Take-Copter power</span>
+    </footer>
+
+  </main>
+
+  <!-- Sweet Interactive Modal -->
+  <div id="cute-modal-overlay" class="modal-overlay" onclick="closeCuteModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div id="modal-emoji" class="modal-emoji">💖</div>
+      <h3 id="modal-title" class="modal-title">Surpriiiise!</h3>
+      <p id="modal-body" class="modal-body">Welcome to the cutest Doraemon world!</p>
+      <button class="modal-close-btn" onclick="closeCuteModal()">Aww Yay! 💕</button>
+    </div>
+  </div>
+
+</body>
+</html>
