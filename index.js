@@ -174,6 +174,12 @@ function closeCuteModal() {
   if (overlay) {
     overlay.classList.remove('active');
   }
+  // If a gadget was just gifted, use its magic now!
+  if (pendingGadget) {
+    const gadget = pendingGadget;
+    pendingGadget = null;
+    setTimeout(() => useGadget(gadget), 300);
+  }
 }
 
 // ✨ Original functions preserved & spiced up with cuteness!
@@ -209,7 +215,8 @@ const gadgets = [
   { name: "Big Light", emoji: "✨", desc: "Shine the light on your favorite sweets to make them giant size!" }
 ];
 
-let lastGadgetIndex = -1;
+let lastGadgetIndex = 0; // Take-Copter is shown first
+let pendingGadget = null;
 
 function pullGadgetFromPocket() {
   playCuteChime('magic');
@@ -240,13 +247,158 @@ function pullGadgetFromPocket() {
   // Launch celebratory confetti with emojis
   launchConfetti(true);
 
-  // Present the Gift in the Cute Modal Popup!
+  // Present the Gift in the Cute Modal Popup! (magic happens when it closes)
+  pendingGadget = gadget;
   showCuteModal(
     "🎁 4D Pocket Gift Unlocked!",
     `Doraemon reached into his pocket and gifted you:\n\n✨ ${gadget.name} ✨\n\n${gadget.desc}`,
     gadget.emoji
   );
 }
+
+// 🪄 Gadget Magic — every gadget really does something!
+const MAGIC_DURATION = 6000;
+const magicClasses = ['magic-flying', 'magic-small', 'magic-big', 'magic-time', 'magic-passloop', 'magic-dressup', 'magic-memory'];
+const dreamPlaces = [
+  { cls: 'place-beach', label: '🏖️ Sunny Beach' },
+  { cls: 'place-space', label: '🌌 Outer Space' },
+  { cls: 'place-sakura', label: '🌸 Sakura Garden' },
+  { cls: 'place-sunset', label: '🌅 Sunset Hills' }
+];
+let magicTimer = null;
+
+function useCurrentGadget(event) {
+  if (event) event.stopPropagation(); // don't pull a new gadget
+  useGadget(gadgets[lastGadgetIndex]);
+}
+
+function clearMagic() {
+  clearTimeout(magicTimer);
+  document.body.classList.remove(...magicClasses);
+  document.querySelectorAll('.magic-layer').forEach(el => el.remove());
+}
+
+function endMagicAfter(ms = MAGIC_DURATION) {
+  magicTimer = setTimeout(clearMagic, ms);
+}
+
+// Small helper: drop a temporary element on the page
+function spawnMagic(text, className, lifetime = MAGIC_DURATION) {
+  const el = document.createElement('div');
+  el.className = `magic-layer ${className}`;
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), lifetime);
+  return el;
+}
+
+function showMagicToast(text) {
+  spawnMagic(text, 'magic-toast', 3500);
+}
+
+function useGadget(gadget) {
+  if (!gadget) return;
+  clearMagic();
+  playCuteChime('magic');
+
+  switch (gadget.name) {
+    case "Take-Copter (Bamboo Copter)":
+      // The whole page takes off and a copter flies across the sky
+      document.body.classList.add('magic-flying');
+      spawnMagic('🚁', 'magic-copter');
+      showMagicToast('🚁 Wheee! The whole page is flying!');
+      endMagicAfter();
+      break;
+
+    case "Anywhere Door (Dokodemo Door)": {
+      // Open a door and teleport to a new dream place (stays until next door)
+      spawnMagic('🚪', 'magic-door', 1600);
+      const current = dreamPlaces.find(p => document.body.classList.contains(p.cls));
+      const options = dreamPlaces.filter(p => p !== current);
+      const place = options[Math.floor(Math.random() * options.length)];
+      setTimeout(() => {
+        dreamPlaces.forEach(p => document.body.classList.remove(p.cls));
+        document.body.classList.add(place.cls);
+        showMagicToast(`🚪 Welcome to ${place.label}!`);
+      }, 900);
+      break;
+    }
+
+    case "Memory Bread (Anki Pan)":
+      // Every word on the page glows as it gets "memorized"
+      document.body.classList.add('magic-memory');
+      spawnMagic('🍞', 'magic-bread', 2000);
+      showMagicToast('🍞 Nom nom! You memorized this whole page!');
+      endMagicAfter(4000);
+      break;
+
+    case "Small Light (Small Light)":
+      // Shrink the photos & buttons into mini pocket size
+      document.body.classList.add('magic-small');
+      spawnMagic('', 'magic-beam magic-beam-small', 1200);
+      showMagicToast('🔦 Shrink! Everything is mini now!');
+      endMagicAfter();
+      break;
+
+    case "Time Machine": {
+      // Travel to a random year — page turns vintage
+      const year = Math.random() > 0.5
+        ? 1900 + Math.floor(Math.random() * 80)
+        : 2100 + Math.floor(Math.random() * 900);
+      document.body.classList.add('magic-time');
+      spawnMagic('⏳', 'magic-clock');
+      showMagicToast(`⏳ Whoosh! You travelled to the year ${year}!`);
+      endMagicAfter();
+      break;
+    }
+
+    case "Pass Loop":
+      // Walls turn see-through and a portal follows your cursor
+      document.body.classList.add('magic-passloop');
+      spawnMagic('🌀', 'magic-portal');
+      showMagicToast('🌀 You can pass through walls now!');
+      endMagicAfter();
+      break;
+
+    case "Dress-Up Camera":
+      // Camera flash, then the photos wear cute outfits
+      spawnMagic('', 'magic-flash', 700);
+      setTimeout(() => {
+        document.body.classList.add('magic-dressup');
+        document.querySelectorAll('.photo-card .image-frame').forEach((frame, i) => {
+          const outfit = document.createElement('span');
+          outfit.className = 'magic-layer magic-outfit';
+          outfit.textContent = ['👑', '🎀', '🎩'][i % 3];
+          frame.appendChild(outfit);
+        });
+        showMagicToast('📸 Snap! Everyone got a cute makeover!');
+      }, 250);
+      endMagicAfter();
+      break;
+
+    case "Big Light":
+      // The cake grows giant and sweets rain down
+      document.body.classList.add('magic-big');
+      spawnMagic('', 'magic-beam magic-beam-big', 1200);
+      for (let i = 0; i < 14; i++) {
+        const sweet = spawnMagic(['🍰', '🍩', '🧁', '🍭', '🍫'][i % 5], 'magic-sweet');
+        sweet.style.left = `${Math.random() * 95}vw`;
+        sweet.style.animationDelay = `${Math.random() * 2}s`;
+      }
+      showMagicToast('✨ Big Light! Giant sweets for everyone!');
+      endMagicAfter();
+      break;
+  }
+}
+
+// Pass Loop portal follows the mouse
+document.addEventListener('mousemove', (e) => {
+  const portal = document.querySelector('.magic-portal');
+  if (portal) {
+    portal.style.left = `${e.clientX}px`;
+    portal.style.top = `${e.clientY}px`;
+  }
+});
 
 // 🔊 Sound Toggle Handler
 function toggleSound() {

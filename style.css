@@ -639,6 +639,7 @@ h1.main-title:hover {
   color: #4a5568;
   line-height: 1.5;
   margin-bottom: 24px;
+  white-space: pre-line;
 }
 
 .modal-close-btn {
@@ -711,6 +712,237 @@ footer.cute-footer {
   0% { opacity: 0; transform: translateY(-30px) scale(0.95); }
   60% { opacity: 1; transform: translateY(10px) scale(1.02); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================
+   🪄 Gadget Magic Effects
+   ========================================== */
+.btn-use-gadget {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: white;
+  border: 2px solid #ddd6fe;
+  font-size: 1rem;
+  padding: 10px 24px;
+}
+
+.magic-layer { pointer-events: none; }
+
+.magic-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  background: #ffffff;
+  color: #7c3aed;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 3px solid #a78bfa;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.25);
+  text-align: center;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  animation: toastPop 3.5s ease forwards;
+}
+
+@keyframes toastPop {
+  0% { opacity: 0; transform: translate(-50%, 30px); }
+  10%, 85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+
+/* 🚁 Take-Copter */
+body.magic-flying .page-container {
+  animation: pageFly 2s ease-in-out infinite;
+}
+
+@keyframes pageFly {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-40px) rotate(-1deg); }
+  75% { transform: translateY(-25px) rotate(1deg); }
+}
+
+.magic-copter {
+  position: fixed;
+  top: 15%;
+  left: -100px;
+  font-size: 4rem;
+  z-index: 998;
+  animation: copterFly 6s linear forwards;
+}
+
+@keyframes copterFly {
+  0% { left: -100px; top: 30%; }
+  50% { top: 10%; }
+  100% { left: calc(100vw + 100px); top: 25%; }
+}
+
+/* 🚪 Anywhere Door */
+.magic-door {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 9rem;
+  z-index: 998;
+  animation: doorOpen 1.6s ease forwards;
+}
+
+@keyframes doorOpen {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  30% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(1) rotateY(0deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(4) rotateY(80deg); opacity: 0; }
+}
+
+body.place-beach { background: linear-gradient(180deg, #4fc3f7 0%, #b3e5fc 55%, #ffe0a3 75%, #ffd180 100%); background-attachment: fixed; }
+body.place-space { background: radial-gradient(circle at 30% 20%, #4c1d95 0%, #1e1b4b 50%, #0f0c29 100%); background-attachment: fixed; }
+body.place-sakura { background: linear-gradient(135deg, #ffd6e8 0%, #ffafcc 50%, #fbc4ab 100%); background-attachment: fixed; }
+body.place-sunset { background: linear-gradient(180deg, #ff9a8b 0%, #ff6a88 45%, #8e7cc3 100%); background-attachment: fixed; }
+
+/* 🍞 Memory Bread */
+body.magic-memory .page-container * {
+  animation: memoryGlow 1.2s ease-in-out 3;
+}
+
+@keyframes memoryGlow {
+  0%, 100% { text-shadow: none; }
+  50% { text-shadow: 0 0 10px #ffd166, 0 0 20px #ffb703; }
+}
+
+.magic-bread {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 7rem;
+  z-index: 998;
+  animation: breadStamp 2s ease forwards;
+}
+
+@keyframes breadStamp {
+  0% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+  30% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+/* 🔦 Small Light & ✨ Big Light beams */
+.magic-beam {
+  position: fixed;
+  inset: 0;
+  z-index: 997;
+  animation: beamFlash 1.2s ease forwards;
+}
+.magic-beam-small { background: radial-gradient(circle, rgba(255, 241, 118, 0.7), transparent 70%); }
+.magic-beam-big { background: radial-gradient(circle, rgba(255, 117, 151, 0.6), transparent 70%); }
+
+@keyframes beamFlash {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.button-row, .hero-header {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.magic-small .photo-card,
+body.magic-small .photo-card:hover { transform: scale(0.45); }
+body.magic-small .button-row { transform: scale(0.6); }
+body.magic-small .hero-header { transform: scale(0.7); }
+
+body.magic-big .card-3,
+body.magic-big .card-3:hover { transform: scale(1.35); z-index: 5; }
+
+.magic-sweet {
+  position: fixed;
+  top: -80px;
+  font-size: 3.5rem;
+  z-index: 998;
+  animation: sweetRain 3.5s ease-in forwards;
+}
+
+@keyframes sweetRain {
+  0% { transform: translateY(0) rotate(0deg) scale(0.5); }
+  100% { transform: translateY(calc(100vh + 160px)) rotate(360deg) scale(1.6); }
+}
+
+/* ⏳ Time Machine */
+body.magic-time .page-container {
+  filter: sepia(0.85) contrast(1.05);
+  animation: timeWarp 0.8s ease;
+}
+
+@keyframes timeWarp {
+  0% { filter: sepia(0) hue-rotate(0deg) blur(0); transform: scale(1); }
+  50% { filter: sepia(0.5) hue-rotate(180deg) blur(4px); transform: scale(0.95) rotate(-2deg); }
+  100% { filter: sepia(0.85); transform: scale(1); }
+}
+
+.magic-clock {
+  position: fixed;
+  top: 90px;
+  left: 24px;
+  font-size: 3rem;
+  z-index: 998;
+  animation: spinPropeller 1s linear infinite;
+}
+
+/* 🌀 Pass Loop */
+body.magic-passloop .photo-card,
+body.magic-passloop .gadget-box,
+body.magic-passloop .button-row {
+  opacity: 0.35;
+  filter: blur(1px);
+}
+
+.magic-portal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 5rem;
+  z-index: 998;
+  transform: translate(-50%, -50%);
+  animation: portalSpin 1.5s linear infinite;
+}
+
+@keyframes portalSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 📸 Dress-Up Camera */
+.magic-flash {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 1002;
+  animation: beamFlash 0.7s ease forwards;
+}
+
+body.magic-dressup .photo-card {
+  border-color: #ff7597;
+  box-shadow: 0 0 0 4px #ffd166, var(--shadow-kawaii);
+}
+
+.magic-outfit {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  animation: outfitDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes outfitDrop {
+  from { transform: translate(-50%, -80px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.magic-flying .page-container,
+  body.magic-memory .page-container * { animation: none; }
 }
 
 /* Responsive Design */
